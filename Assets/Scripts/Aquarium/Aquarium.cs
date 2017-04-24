@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Aquarium : MonoBehaviour {
 
+    public GameObject ref_middlePoint;
+
     public static Aquarium instance;
 
     [HideInInspector]
