@@ -4,6 +4,7 @@ using System.Collections;
 public class Aquarium : MonoBehaviour {
 
     public GameObject ref_middlePoint;
+    public GameObject ref_water;
 
     public static Aquarium instance;
 
@@ -20,5 +21,13 @@ public class Aquarium : MonoBehaviour {
     {
         bounds = GetComponent<BoxCollider2D>().bounds;     
     }
+
+
+
+    public void ApplyMaterial(Material _mat)
+    {
+        ref_water.GetComponent<SpriteRenderer>().material = _mat;
+    }
+
 	
 }

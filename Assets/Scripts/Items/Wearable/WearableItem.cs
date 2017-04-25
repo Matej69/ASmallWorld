@@ -8,13 +8,16 @@ public class WearableItem : Item {
     {
         GetComponent<ItemPhysics>().isInWater = true;
         GetComponent<ItemPhysics>().ReduceMovementByFactor(8);
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.65f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.80f);
     }
 
     public override void OnBottomTouched()
     {
-        GetComponent<ItemPhysics>().SetState(ItemPhysics.E_STATE.FOLLOWING);
-        GetComponent<ItemPhysics>().SetMobility(false);
+        if (GetComponent<ItemPhysics>().didTouchedSurface)
+        {
+            GetComponent<ItemPhysics>().SetState(ItemPhysics.E_STATE.FOLLOWING);
+            GetComponent<ItemPhysics>().SetMobility(false);
+        }
         //CALL GUI TEXT FOR FISH
     }
 

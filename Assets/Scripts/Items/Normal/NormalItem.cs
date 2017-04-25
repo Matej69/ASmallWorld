@@ -9,12 +9,18 @@ public class NormalItem : Item
     {
         GetComponent<ItemPhysics>().isInWater = true;
         GetComponent<ItemPhysics>().ReduceMovementByFactor(8);
-        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.65f);
+        GetComponent<SpriteRenderer>().color = new Color(1, 1, 1, 0.80f);
     }
 
     public override void OnBottomTouched()
     {
-        GetComponent<ItemPhysics>().SetMobility(false);
+
+        if (GetComponent<ItemPhysics>().didTouchedSurface)
+        {
+            GetComponent<ItemPhysics>().SetMobility(false);
+            if (id == SpriteManager.E_SPRITE.KNIFE)
+                AudioManager.instance.CreateAudioObject(AudioManager.E_AUDIO.CUT_OFF);
+        }
         //CALL GUI TEXT FOR FISH
     }
 

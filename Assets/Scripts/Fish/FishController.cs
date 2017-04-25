@@ -36,9 +36,9 @@ public class FishController : MonoBehaviour {
     void Start()
     {
         bounds = boxCol.bounds;
-        velocity = new Vector2(0,0);
+        //velocity = new Vector2(0,0);
         targetVelocity = velocity;
-        timer_changeDir = new Timer(1f);
+        timer_changeDir = new Timer(0f);
     }
     
 	void Update()
@@ -145,6 +145,13 @@ public class FishController : MonoBehaviour {
             velocity.y = (_dir == 1) ? Mathf.Abs(velocity.y) : -Mathf.Abs(velocity.y);
     }
 
+    public void SetSpeeds(float _minSpeed, float _maxSpeed, float _minResetTime, float _maxResetTime)
+    {
+        minSpeed = _minSpeed;
+        maxSpeed = _maxSpeed;
+        minChangeDirTime = _minResetTime;
+        maxChangeDirTime = _maxResetTime;
+    }
 
 
 

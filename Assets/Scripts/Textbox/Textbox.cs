@@ -31,8 +31,8 @@ public class Textbox : MonoBehaviour {
 
 
         displayNewLetter = new Timer(0.045f);
+        Textbox.GetInstance().EnableMessageBox(new List<TextboxMessageInfo>() { new TextboxMessageInfo("IM FISH DUDE!") });
 
-        Textbox.GetInstance().EnableMessageBox(new List<TextboxMessageInfo>() { new TextboxMessageInfo("IM FISH DUDE!") , new TextboxMessageInfo("IM FISH DUDE!") });
     }
 	
 	// Update is called once per frame

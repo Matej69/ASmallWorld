@@ -5,9 +5,15 @@ public class ItemPhysics : MonoBehaviour {
 
     [HideInInspector]
     public bool isInWater = false;
+    [HideInInspector]
+    public bool didTouchedBottom = false;
+    [HideInInspector]
+    public bool didTouchedSurface = false;
+    [HideInInspector]
+    public bool didMiddleTouched = false;
 
     void Update ()
-    {
+    {        
         if (canMove && state == E_STATE.FALLING)
         {
             MoveTowardsMiddle(0.1f);

@@ -12,36 +12,37 @@ public class Item : MonoBehaviour {
 
     [HideInInspector]
     public SpriteManager.E_SPRITE id;
-    /*
-    public void OnClick()
-    {        
-        //SPAWN GO WITH SAME ID but pair.notHoldSprite
-        GameObject go = (GameObject)Instantiate(pref_fallingItem, transform.position, Quaternion.identity);
-        go.GetComponent<SpriteRenderer>().sprite = SpriteManager.GetSpritePair(id).notHoldSprite;
-        //DESTROY ITEM IN HAND
-        Destroy(gameObject);
-    }
-    */
+
     virtual public void OnWaterTouched() { }
+    virtual public void OnMiddleTouched() { }
     virtual public void OnBottomTouched() { }
-    virtual public void OnFishTouched() { }
-   
+    virtual public void OnFishTouched() { }    
     
+
     void OnTriggerEnter2D(Collider2D col)
     {
         //Water touched
-        if(col.tag == "AquariumSurface")
+        if(col.tag == "AquariumSurface" && !GetComponent<ItemPhysics>().didTouchedSurface)
         {
             OnWaterTouched();
+            GetComponent<ItemPhysics>().didTouchedSurface = true;
+            Textbox.GetInstance().EnableMessageBox(ItemMessagesInfo.Instance().GetMessages(id));
+            AudioManager.instance.CreateAudioObject(AudioManager.E_AUDIO.WATER_SPLASH);
+        }
+        //Water touched
+        if (col.tag == "AquariumMiddle" && !GetComponent<ItemPhysics>().didMiddleTouched)
+        {
+            OnMiddleTouched();            
+            GetComponent<ItemPhysics>().didMiddleTouched = true;           
         }
         //Water bottom touched
-        if (col.tag == "AquariumBottom")
+        if (col.tag == "AquariumBottom" && !GetComponent<ItemPhysics>().didTouchedBottom && GetComponent<ItemPhysics>().didMiddleTouched)
         {
-            if (GetComponent<ItemPhysics>().isInWater)
                 OnBottomTouched();
+                GetComponent<ItemPhysics>().didTouchedBottom = true;
         }
         //Fish touched
-        if (col.tag == "Fish")
+        if (col.tag == "Fish" && GetComponent<ItemPhysics>().didTouchedSurface)
         {
             if(GetComponent<ItemPhysics>().isInWater)
                 OnFishTouched();

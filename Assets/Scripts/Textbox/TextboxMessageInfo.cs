@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TextboxMessageInfo
 {
@@ -16,5 +17,9 @@ public class TextboxMessageInfo
 
     public bool IsMessageRead() { return (msg == targetMsg); }
     public void ReadLetter() { msg = msg + targetMsg[lastReadPos++]; }
+
+    
+
+
 
 }
